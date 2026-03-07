@@ -4,7 +4,6 @@ import 'package:arabic_base/core/theme/app_gradients.dart';
 import 'package:arabic_base/core/theme/app_text_styles.dart';
 import 'package:arabic_base/core/constants/app_constants.dart';
 
-/// زر أساسي مع تدرج لوني
 class PrimaryButton extends StatelessWidget {
   final String text;
   final VoidCallback? onPressed;

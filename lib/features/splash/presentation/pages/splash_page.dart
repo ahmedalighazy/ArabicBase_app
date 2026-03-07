@@ -13,167 +13,238 @@ class SplashPage extends StatefulWidget {
   State<SplashPage> createState() => _SplashPageState();
 }
 
-class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateMixin {
-  late AnimationController _animationController;
-  late Animation<double> _logoFadeAnimation;
+class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
+  late AnimationController _logoController;
+  late AnimationController _textController;
+  late AnimationController _circleController;
+  
   late Animation<double> _logoScaleAnimation;
-  late Animation<Offset> _logoSlideAnimation;
-  late Animation<double> _textFadeAnimation;
-  late Animation<Offset> _textSlideAnimation;
+  late Animation<Offset> _arabicSlideAnimation;
+  late Animation<Offset> _baseSlideAnimation;
+  late Animation<double> _circleScaleAnimation;
 
   @override
   void initState() {
     super.initState();
     
-    _animationController = AnimationController(
+    // Logo Animation Controller (0-1.5s)
+    _logoController = AnimationController(
       vsync: this,
-      duration: AppConstants.slowAnimationDuration,
+      duration: AppConstants.splashLogoAnimationDuration,
     );
 
-    _logoFadeAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(
-      CurvedAnimation(
-        parent: _animationController,
-        curve: const Interval(0.0, 0.5, curve: Curves.easeOut),
-      ),
+    // Text Animation Controller (1-2.5s)
+    _textController = AnimationController(
+      vsync: this,
+      duration: AppConstants.splashTextAnimationDuration,
     );
 
+    // Circle Animation Controller (2.5-4s)
+    _circleController = AnimationController(
+      vsync: this,
+      duration: AppConstants.splashCircleAnimationDuration,
+    );
+
+    // Logo Scale Animation (أصغر → كبير ويثبت)
     _logoScaleAnimation = Tween<double>(
-      begin: 0.3,
+      begin: 0.1, // أصغر من الأول
       end: 1.0,
     ).animate(
       CurvedAnimation(
-        parent: _animationController,
-        curve: const Interval(0.0, 0.5, curve: Curves.easeOutBack),
+        parent: _logoController,
+        curve: Curves.easeOutBack,
       ),
     );
 
-    _logoSlideAnimation = Tween<Offset>(
-      begin: const Offset(0, -0.3),
+    // Arabic Text Slide (من بعيد خارج الشاشة الشمال → النص)
+    _arabicSlideAnimation = Tween<Offset>(
+      begin: const Offset(-5.0, 0), // أبعد من الأول
       end: Offset.zero,
     ).animate(
       CurvedAnimation(
-        parent: _animationController,
-        curve: const Interval(0.0, 0.5, curve: Curves.easeOut),
+        parent: _textController,
+        curve: Curves.easeOutCubic,
       ),
     );
 
-    _textFadeAnimation = Tween<double>(
+    // Base Text Slide (من بعيد خارج الشاشة اليمين → النص)
+    _baseSlideAnimation = Tween<Offset>(
+      begin: const Offset(5.0, 0), // أبعد من الأول
+      end: Offset.zero,
+    ).animate(
+      CurvedAnimation(
+        parent: _textController,
+        curve: Curves.easeOutCubic,
+      ),
+    );
+
+    // Circle Scale Animation (صغير → يغطي الشاشة)
+    _circleScaleAnimation = Tween<double>(
       begin: 0.0,
       end: 1.0,
     ).animate(
       CurvedAnimation(
-        parent: _animationController,
-        curve: const Interval(0.4, 0.8, curve: Curves.easeOut),
+        parent: _circleController,
+        curve: Curves.easeInOut,
       ),
     );
 
-    _textSlideAnimation = Tween<Offset>(
-      begin: const Offset(0, 0.5),
-      end: Offset.zero,
-    ).animate(
-      CurvedAnimation(
-        parent: _animationController,
-        curve: const Interval(0.4, 0.8, curve: Curves.easeOut),
-      ),
-    );
+    // Start animations sequence
+    _startAnimations();
+  }
 
-    _animationController.forward();
-
-    Future.delayed(AppConstants.splashDuration, () {
-      if (mounted) {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) => const OnboardingPage(),
-          ),
-        );
-      }
-    });
+  void _startAnimations() async {
+    // التلاتة يبدأوا في نفس الوقت ويوصلوا للنص مع بعض
+    await Future.wait([
+      _logoController.forward(),
+      _textController.forward(),
+    ]);
+    
+    // بعد ما يتمركزوا، الدائرة الخضراء تبدأ
+    await _circleController.forward();
+    
+    // Navigate to onboarding
+    if (mounted) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => const OnboardingPage(),
+        ),
+      );
+    }
   }
 
   @override
   void dispose() {
-    _animationController.dispose();
+    _logoController.dispose();
+    _textController.dispose();
+    _circleController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final maxDimension = screenWidth > screenHeight ? screenWidth : screenHeight;
     
     return Scaffold(
-      backgroundColor: Colors.white,
       body: Stack(
         children: [
+          // 1. Background Image (ثابتة)
           Positioned.fill(
             child: Image.asset(
               AssetsConstants.backgroundApp,
               fit: BoxFit.cover,
-              opacity: AlwaysStoppedAnimation(AppConstants.opacityVeryLight),
               errorBuilder: (context, error, stackTrace) {
                 return Container(color: Colors.white);
               },
             ),
           ),
           
+          // 2. Circular Reveal Animation (الدائرة الخضراء)
+          AnimatedBuilder(
+            animation: _circleController,
+            builder: (context, child) {
+              return ClipPath(
+                clipper: CircularRevealClipper(
+                  fraction: _circleScaleAnimation.value,
+                  centerX: screenWidth / 2,
+                  centerY: screenHeight / 2,
+                  minRadius: 0,
+                  maxRadius: maxDimension * 1.5,
+                ),
+                child: Container(
+                  color: AppColors.primaryBg,
+                ),
+              );
+            },
+          ),
+          
+          // 3. Logo and Text (فوق كل حاجة) - يتحركوا مع بعض
           Center(
-            child: AnimatedBuilder(
-              animation: _animationController,
-              builder: (context, child) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    // أنيميشن الشعار
-                    SlideTransition(
-                      position: _logoSlideAnimation,
-                      child: FadeTransition(
-                        opacity: _logoFadeAnimation,
-                        child: ScaleTransition(
-                          scale: _logoScaleAnimation,
-                          child: SvgPicture.asset(
-                            AssetsConstants.logo,
-                            width: screenWidth * 0.50,
-                            height: screenWidth * 0.25,
-                            fit: BoxFit.contain,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Logo Animation (يكبر)
+                ScaleTransition(
+                  scale: _logoScaleAnimation,
+                  child: SvgPicture.asset(
+                    AssetsConstants.logo,
+                    width: screenWidth * 0.50,
+                    height: screenWidth * 0.25,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+                
+                SizedBox(height: AppConstants.spacingMedium),
+                
+                // Text Animations (يجوا من الجنبين)
+                ClipRect(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      // Arabic (من الشمال)
+                      SlideTransition(
+                        position: _arabicSlideAnimation,
+                        child: Text(
+                          'Arabic',
+                          style: AppTextStyles.displaySmall,
+                        ),
+                      ),
+                      // Base (من اليمين)
+                      SlideTransition(
+                        position: _baseSlideAnimation,
+                        child: Text(
+                          'Base.',
+                          style: AppTextStyles.displayLarge.copyWith(
+                            color: AppColors.secondary,
                           ),
                         ),
                       ),
-                    ),
-                    
-                    SizedBox(height: AppConstants.spacingMedium),
-                    
-                    // أنيميشن النص
-                    SlideTransition(
-                      position: _textSlideAnimation,
-                      child: FadeTransition(
-                        opacity: _textFadeAnimation,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              'Arabic',
-                              style: AppTextStyles.displaySmall,
-                            ),
-                            Text(
-                              'Base.',
-                              style: AppTextStyles.displayLarge.copyWith(
-                                color: AppColors.secondary,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                );
-              },
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
         ],
       ),
     );
   }
+}
+
+// Custom Clipper for Circular Reveal Animation
+class CircularRevealClipper extends CustomClipper<Path> {
+  final double fraction;
+  final double centerX;
+  final double centerY;
+  final double minRadius;
+  final double maxRadius;
+
+  CircularRevealClipper({
+    required this.fraction,
+    required this.centerX,
+    required this.centerY,
+    this.minRadius = 0,
+    required this.maxRadius,
+  });
+
+  @override
+  Path getClip(Size size) {
+    final path = Path();
+    final radius = minRadius + (maxRadius - minRadius) * fraction;
+    
+    path.addOval(
+      Rect.fromCircle(
+        center: Offset(centerX, centerY),
+        radius: radius,
+      ),
+    );
+    
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) => true;
 }

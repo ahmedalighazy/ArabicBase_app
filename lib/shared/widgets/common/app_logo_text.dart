@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:arabic_base/core/theme/app_colors.dart';
 import 'package:arabic_base/core/theme/app_text_styles.dart';
 
-/// نص شعار التطبيق (ArabicBase)
 class AppLogoText extends StatelessWidget {
   final double? fontSize;
   

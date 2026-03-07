@@ -3,7 +3,6 @@ import 'package:arabic_base/core/theme/app_colors.dart';
 import 'package:arabic_base/core/theme/app_gradients.dart';
 import 'package:arabic_base/core/constants/app_constants.dart';
 
-/// شريط التقدم
 class ProgressBar extends StatelessWidget {
   final double progress;
   final double? height;
@@ -20,7 +19,6 @@ class ProgressBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        // الخلفية
         Container(
           height: height ?? AppConstants.progressBarHeight,
           decoration: BoxDecoration(
@@ -28,7 +26,6 @@ class ProgressBar extends StatelessWidget {
             borderRadius: BorderRadius.circular(AppConstants.borderRadiusSmall),
           ),
         ),
-        // التقدم
         FractionallySizedBox(
           alignment: rtl ? Alignment.centerRight : Alignment.centerLeft,
           widthFactor: progress.clamp(0.0, 1.0),

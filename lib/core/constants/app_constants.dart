@@ -3,11 +3,16 @@ class AppConstants {
   AppConstants._();
   
   // ==================== Durations ====================
-  static const Duration splashDuration = Duration(seconds: 3);
+  static const Duration splashDuration = Duration(seconds: 4);
   static const Duration animationDuration = Duration(milliseconds: 600);
   static const Duration fastAnimationDuration = Duration(milliseconds: 300);
   static const Duration slowAnimationDuration = Duration(milliseconds: 2000);
   static const Duration pageTransitionDuration = Duration(milliseconds: 400);
+  
+  // Splash Animation Durations
+  static const Duration splashLogoAnimationDuration = Duration(milliseconds: 1500);
+  static const Duration splashTextAnimationDuration = Duration(milliseconds: 1500);
+  static const Duration splashCircleAnimationDuration = Duration(milliseconds: 1500);
   
   // ==================== Sizes ====================
   static const double borderRadiusSmall = 4.0;

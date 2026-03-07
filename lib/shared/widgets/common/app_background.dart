@@ -18,7 +18,6 @@ class AppBackground extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        // الخلفية
         if (backgroundColor != null)
           Container(color: backgroundColor)
         else
@@ -31,8 +30,6 @@ class AppBackground extends StatelessWidget {
               ),
             ),
           ),
-        
-        // المحتوى
         child,
       ],
     );
