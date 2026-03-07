@@ -1,0 +1,10 @@
+# SVG Images
+# Place SVG vector images here
+# SVG files are scalable and perfect for icons and illustrations
+# 
+# Expected files:
+# - logo.svg
+# - icons/
+# - illustrations/
+# 
+# Use flutter_svg package to display SVG files

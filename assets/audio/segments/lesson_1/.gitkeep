@@ -1,0 +1,7 @@
+# Lesson 1 - Phonetic Segments Audio
+# Place phonetic segment audio files for lesson 1 here
+# Naming convention: word_{word_id}_seg_{segment_number}.mp3
+# Example:
+# - word_1_seg_1.mp3
+# - word_1_seg_2.mp3
+# - word_2_seg_1.mp3

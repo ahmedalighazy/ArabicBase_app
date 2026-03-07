@@ -1,17 +1,117 @@
-# arabic_base
+# ArabicBase - قاعدة العربية
 
-A new Flutter project.
+تطبيق تعليمي يساعد المبتدئين والأطفال على تعلم قراءة الكلمات العربية باستخدام الصوتيات (Phonics).
 
-## Getting Started
+## 📱 عن التطبيق
 
-This project is a starting point for a Flutter application.
+ArabicBase هو تطبيق تعليمي تفاعلي مصمم لمساعدة الأطفال والمبتدئين على تعلم القراءة العربية من خلال:
+- تقسيم الكلمات إلى مقاطع صوتية
+- الاستماع لكل مقطع على حدة
+- الاستماع للكلمة كاملة
+- ممارسة القراءة بشكل تفاعلي
 
-A few resources to get you started if this is your first Flutter project:
+## 🎯 الميزات الرئيسية
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+- ✅ تعلم الحروف العربية (28 حرف)
+- ✅ تعلم الكلمات من حرفين وثلاثة حروف
+- ✅ تقسيم صوتي للكلمات (Phonics)
+- ✅ ملفات صوتية واضحة لكل مقطع
+- ✅ واجهة مستخدم جذابة للأطفال
+- ✅ تتبع التقدم والإنجازات
+- ✅ دعم كامل للغة العربية (RTL)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🏗️ المعمارية
+
+التطبيق مبني باستخدام:
+- **Clean Architecture** - فصل واضح للطبقات
+- **Flutter** - إطار العمل
+- **Bloc/Cubit** - إدارة الحالة
+- **Get It** - حقن التبعيات
+- **Hive** - التخزين المحلي
+- **Just Audio** - تشغيل الملفات الصوتية
+
+## 📂 هيكل المشروع
+
+```
+lib/
+├── core/               # الأدوات المشتركة
+├── features/          # ميزات التطبيق
+│   ├── splash/
+│   ├── onboarding/
+│   ├── home/
+│   ├── lessons/
+│   ├── word_learning/
+│   ├── practice/
+│   ├── progress/
+│   └── audio_player/
+└── shared/            # الويدجتس المشتركة
+```
+
+## 🚀 البدء
+
+### المتطلبات
+
+- Flutter SDK (3.0.0 أو أحدث)
+- Dart SDK (3.0.0 أو أحدث)
+- Android Studio / VS Code
+- محاكي أو جهاز فعلي
+
+### التثبيت
+
+1. استنساخ المشروع:
+```bash
+git clone https://github.com/yourusername/arabic_base.git
+cd arabic_base
+```
+
+2. تثبيت الحزم:
+```bash
+flutter pub get
+```
+
+3. تشغيل التطبيق:
+```bash
+flutter run
+```
+
+## 📚 التوثيق
+
+للمزيد من التفاصيل، راجع ملفات التوثيق:
+- [المعمارية](docs/ARCHITECTURE.md)
+- [هيكل المجلدات](docs/FOLDER_STRUCTURE.md)
+- [نظام الصوتيات](docs/AUDIO_SYSTEM.md)
+- [أفضل الممارسات](docs/BEST_PRACTICES.md)
+- [دليل الأصول](docs/ASSETS_GUIDE.md)
+
+## 🎨 الألوان الأساسية
+
+- **Primary (أخضر):** `#007F6D`
+- **Secondary (برتقالي):** `#F28705`
+
+## 📝 الحالة الحالية
+
+- [x] إعداد المشروع والمعمارية
+- [x] تصميم شاشة Splash
+- [ ] شاشات Onboarding
+- [ ] الشاشة الرئيسية
+- [ ] شاشة الدروس
+- [ ] شاشة تعلم الكلمات
+- [ ] نظام الصوتيات
+- [ ] شاشة الممارسة
+- [ ] شاشة التقدم
+
+## 🤝 المساهمة
+
+المساهمات مرحب بها! يرجى فتح Issue أو Pull Request.
+
+## 📄 الترخيص
+
+هذا المشروع مرخص تحت [MIT License](LICENSE).
+
+## 👨‍💻 المطور
+
+تم التطوير بواسطة فريق ArabicBase
+
+---
+
+**ملاحظة:** هذا المشروع قيد التطوير النشط.
