@@ -20,8 +20,12 @@ class _OnboardingPageState extends State<OnboardingPage> with TickerProviderStat
   
   late AnimationController _fadeController;
   late AnimationController _slideController;
+  late AnimationController _logoController;
+  
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
+  late Animation<double> _logoFadeAnimation;
+  late Animation<Offset> _logoSlideAnimation;
 
   final List<Onboarding> _pages = const [
     Onboarding(
@@ -45,6 +49,12 @@ class _OnboardingPageState extends State<OnboardingPage> with TickerProviderStat
   void initState() {
     super.initState();
     
+    // Logo Animation Controller (أول ما الصفحة تفتح)
+    _logoController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 600),
+    );
+    
     _fadeController = AnimationController(
       vsync: this,
       duration: AppConstants.animationDuration,
@@ -54,6 +64,24 @@ class _OnboardingPageState extends State<OnboardingPage> with TickerProviderStat
       vsync: this,
       duration: AppConstants.animationDuration,
     );
+
+    // Logo Fade Animation
+    _logoFadeAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(
+      parent: _logoController,
+      curve: Curves.easeOut,
+    ));
+
+    // Logo Slide Animation (من فوق مع bounce)
+    _logoSlideAnimation = Tween<Offset>(
+      begin: const Offset(0, -0.3),
+      end: Offset.zero,
+    ).animate(CurvedAnimation(
+      parent: _logoController,
+      curve: Curves.easeOutBack, // bounce effect
+    ));
 
     _fadeAnimation = Tween<double>(
       begin: 0.0,
@@ -71,6 +99,9 @@ class _OnboardingPageState extends State<OnboardingPage> with TickerProviderStat
       curve: Curves.easeOut,
     ));
 
+    // بدء أنيميشن اللوجو أول ما الصفحة تفتح
+    _logoController.forward();
+    
     // بدء الأنيميشن للصفحة الأولى
     _fadeController.forward();
     _slideController.forward();
@@ -81,6 +112,7 @@ class _OnboardingPageState extends State<OnboardingPage> with TickerProviderStat
     _pageController.dispose();
     _fadeController.dispose();
     _slideController.dispose();
+    _logoController.dispose();
     super.dispose();
   }
 
@@ -89,7 +121,7 @@ class _OnboardingPageState extends State<OnboardingPage> with TickerProviderStat
       _currentPage = page;
     });
     
-    // إعادة تشغيل الأنيميشن
+    // إعادة تشغيل الأنيميشن للمحتوى فقط
     _fadeController.reset();
     _slideController.reset();
     _fadeController.forward();
@@ -118,13 +150,19 @@ class _OnboardingPageState extends State<OnboardingPage> with TickerProviderStat
       body: SafeArea(
         child: Column(
           children: [
-            // الشعار في الأعلى
+            // الشعار في الأعلى مع أنيميشن
             Padding(
               padding: EdgeInsets.only(
                 top: AppConstants.paddingXXLarge,
                 bottom: AppConstants.paddingLarge,
               ),
-              child: const AppLogoText(),
+              child: SlideTransition(
+                position: _logoSlideAnimation,
+                child: FadeTransition(
+                  opacity: _logoFadeAnimation,
+                  child: const AppLogoText(),
+                ),
+              ),
             ),
             
             // محتوى الصفحات

@@ -5,30 +5,28 @@ class Responsive {
   
   Responsive(this.context);
   
-  // الحصول على عرض الشاشة
   double get width => MediaQuery.of(context).size.width;
   
-  // الحصول على ارتفاع الشاشة
+
   double get height => MediaQuery.of(context).size.height;
   
-  // حساب النسبة المئوية من العرض
+
   double wp(double percentage) => width * percentage / 100;
   
-  // حساب النسبة المئوية من الارتفاع
+
   double hp(double percentage) => height * percentage / 100;
   
-  // حساب حجم الخط بناءً على عرض الشاشة
-  double sp(double size) => size * (width / 375); // 375 هو عرض iPhone X كمرجع
+  double sp(double size) => size * (width / 375); 
   
-  // التحقق من نوع الجهاز
+ 
   bool get isMobile => width < 600;
   bool get isTablet => width >= 600 && width < 900;
   bool get isDesktop => width >= 900;
   
-  // الحصول على padding آمن
+
   EdgeInsets get safePadding => MediaQuery.of(context).padding;
   
-  // حساب responsive padding
+
   EdgeInsets responsivePadding({
     double? all,
     double? horizontal,
@@ -47,7 +45,7 @@ class Responsive {
   }
 }
 
-// Extension للوصول السريع
+
 extension ResponsiveExtension on BuildContext {
   Responsive get responsive => Responsive(this);
 }
