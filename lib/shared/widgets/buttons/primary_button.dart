@@ -46,20 +46,20 @@ class PrimaryButton extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
-                if (icon != null) ...[
-                  Icon(
-                    icon,
-                    size: AppConstants.iconSizeSmall,
-                    color: isDisabled ? AppColors.textSecondary : Colors.white,
-                  ),
-                  SizedBox(width: AppConstants.spacingSmall),
-                ],
                 Text(
                   text,
                   style: AppTextStyles.buttonLarge.copyWith(
                     color: isDisabled ? AppColors.textSecondary : Colors.white,
                   ),
                 ),
+                if (icon != null) ...[
+                  SizedBox(width: AppConstants.spacingSmall),
+                  Icon(
+                    icon,
+                    size: AppConstants.iconSizeSmall,
+                    color: isDisabled ? AppColors.textSecondary : Colors.white,
+                  ),
+                ],
               ],
             ),
           ),

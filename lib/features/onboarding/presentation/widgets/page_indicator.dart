@@ -23,15 +23,17 @@ class PageIndicator extends StatelessWidget {
           margin: EdgeInsets.symmetric(
             horizontal: AppConstants.spacingXSmall,
           ),
-          width: currentPage == index ? 24 : 8,
-          height: 8,
+          width: currentPage == index ? 24 : 12,
+          height: 12,
           decoration: BoxDecoration(
             color: currentPage == index 
-                ? AppColors.primary 
-                : AppColors.primary.withValues(alpha: 0.3),
-            borderRadius: BorderRadius.circular(
-              AppConstants.borderRadiusSmall,
+                ? AppColors.primary // ممتلئ
+                : Colors.transparent, // فاضي
+            border: Border.all(
+              color: AppColors.primary,
+              width: 2,
             ),
+            borderRadius: BorderRadius.circular(6),
           ),
         ),
       ),

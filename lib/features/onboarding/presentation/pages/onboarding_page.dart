@@ -187,10 +187,10 @@ class _OnboardingPageState extends State<OnboardingPage> with TickerProviderStat
               ),
             ),
             
-            // المؤشرات
+            // المؤشرات (تحت النص مباشرة)
             Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: AppConstants.paddingXLarge,
+              padding: EdgeInsets.only(
+                bottom: AppConstants.paddingLarge,
               ),
               child: PageIndicator(
                 currentPage: _currentPage,
@@ -210,48 +210,72 @@ class _OnboardingPageState extends State<OnboardingPage> with TickerProviderStat
                   // زر تخطي
                   TextButton(
                     onPressed: _skip,
+                    style: TextButton.styleFrom(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 12,
+                      ),
+                    ),
                     child: Text(
                       'تخطي',
                       style: TextStyle(
-                        fontFamily: AssetsConstants.fontCairo,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Cairo',
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
                         color: AppColors.secondary,
                       ),
                     ),
                   ),
                   
-                  // زر التالي/البدء
-                  ElevatedButton(
-                    onPressed: _nextPage,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primary,
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 32,
-                        vertical: 16,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      elevation: 2,
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          _currentPage == _pages.length - 1 ? 'هيا نبدأ' : '',
-                          style: TextStyle(
-                            fontFamily: AssetsConstants.fontCairo,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
+                  // زر التالي/البدء (دائري)
+                  _currentPage == _pages.length - 1
+                      ? ElevatedButton(
+                          onPressed: _nextPage,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.primary,
+                            foregroundColor: Colors.white,
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 32,
+                              vertical: 16,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            elevation: 2,
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                'هيا نبدأ',
+                                style: TextStyle(
+                                  fontFamily: 'Cairo',
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(width: 8),
+                              Icon(Icons.arrow_forward, size: 20),
+                            ],
+                          ),
+                        )
+                      : Container(
+                          width: 56,
+                          height: 56,
+                          decoration: BoxDecoration(
+                            color: AppColors.primary,
+                            shape: BoxShape.circle,
+
+                          ),
+                          child: IconButton(
+                            onPressed: _nextPage,
+                            icon: Icon(
+                              Icons.arrow_forward,
+                              color: Colors.white,
+                              size: 24,
+                            ),
                           ),
                         ),
-                        const SizedBox(width: 8),
-                        const Icon(Icons.arrow_forward, size: 20),
-                      ],
-                    ),
-                  ),
                 ],
               ),
             ),

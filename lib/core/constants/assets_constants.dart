@@ -41,12 +41,14 @@ class AssetsConstants {
   static const String svgIconPrevious = 'assets/images/svg/icons/previous.svg';
   static const String svgIconCheck = 'assets/images/svg/icons/check.svg';
   static const String svgIconClose = 'assets/images/svg/icons/close.svg';
-  static const String svgIconHome = 'assets/images/svg/icons/home.svg';
+  static const String svgIconHome = 'assets/images/svg/icons/Icons_home.svg';
   static const String svgIconSettings = 'assets/images/svg/icons/settings.svg';
   static const String svgIconStar = 'assets/images/svg/icons/star.svg';
   static const String svgIconStarFilled = 'assets/images/svg/icons/star_filled.svg';
   static const String svgIconTrophy = 'assets/images/svg/icons/trophy.svg';
   static const String svgIconBook = 'assets/images/svg/icons/icon_book111.svg';
+  static const String svgIconLesson = 'assets/images/svg/icons/icon_lesson.svg';
+  static const String svgIconTraining = 'assets/images/svg/icons/icon_trainng.svg';
   
   // SVG Illustrations
   static const String svgIllustrationOnboarding1 = 'assets/images/svg/illustrations/image1.svg';

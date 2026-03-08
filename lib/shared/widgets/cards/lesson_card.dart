@@ -5,18 +5,17 @@ import 'package:arabic_base/core/theme/app_colors.dart';
 import 'package:arabic_base/core/theme/app_text_styles.dart';
 import 'package:arabic_base/core/constants/assets_constants.dart';
 import 'package:arabic_base/core/utils/responsive.dart';
+import 'package:arabic_base/core/navigation/unit_navigator.dart';
 import 'package:arabic_base/features/lessons/domain/entities/lesson.dart';
 import 'package:arabic_base/shared/widgets/buttons/primary_button.dart';
 import 'package:arabic_base/shared/widgets/progress/progress_bar.dart';
 
 class LessonCard extends StatelessWidget {
   final Lesson lesson;
-  final VoidCallback onTap;
 
   const LessonCard({
     super.key,
     required this.lesson,
-    required this.onTap,
   });
 
   @override
@@ -55,7 +54,7 @@ class LessonCard extends StatelessWidget {
             Expanded(child: _buildContent()),
             _buildDivider(),
             SizedBox(height: AppConstants.spacingLarge),
-            _buildButton(),
+            _buildButton(context),
           ],
         ),
       ),
@@ -177,7 +176,7 @@ class LessonCard extends StatelessWidget {
     );
   }
 
-  Widget _buildButton() {
+  Widget _buildButton(BuildContext context) {
     return Padding(
       padding: EdgeInsets.fromLTRB(
         AppConstants.paddingXLarge,
@@ -187,8 +186,11 @@ class LessonCard extends StatelessWidget {
       ),
       child: PrimaryButton(
         text: lesson.isLocked ? 'مغلق' : 'عرض الدروس',
-        icon: Icons.arrow_back,
-        onPressed: onTap,
+        icon: Icons.arrow_forward_outlined,
+        onPressed: lesson.isLocked ? null : () {
+          print('Navigating to unit: ${lesson.id}');
+          UnitNavigator.navigateToUnit(context, lesson.id);
+        },
         isDisabled: lesson.isLocked,
       ),
     );

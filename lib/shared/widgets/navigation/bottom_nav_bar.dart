@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:arabic_base/core/constants/app_constants.dart';
+import 'package:arabic_base/core/constants/assets_constants.dart';
 import 'package:arabic_base/core/theme/app_colors.dart';
 import 'package:arabic_base/core/theme/app_gradients.dart';
 import 'package:arabic_base/core/theme/app_text_styles.dart';
@@ -25,9 +27,7 @@ class BottomNavBar extends StatelessWidget {
       ),
       height: AppConstants.bottomNavHeight,
       decoration: BoxDecoration(
-        gradient: AppGradients.primaryGradientTransparent(
-          AppConstants.opacityVeryHigh,
-        ),
+        gradient: AppGradients.primaryGradient, // تدرج كامل بدون شفافية
         borderRadius: BorderRadius.circular(AppConstants.borderRadiusMedium),
         boxShadow: [
           BoxShadow(
@@ -88,16 +88,20 @@ class BottomNavBar extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              Icons.menu_book_rounded,
-              color: AppColors.primary,
-              size: AppConstants.iconSizeMedium,
-            ),
-            SizedBox(width: AppConstants.spacingSmall),
             Text(
               'الفهرس',
               style: AppTextStyles.buttonLarge.copyWith(
                 color: AppColors.primary,
+              ),
+            ),
+            SizedBox(width: AppConstants.spacingSmall),
+            SvgPicture.asset(
+              AssetsConstants.svgIconHome,
+              width: AppConstants.iconSizeMedium,
+              height: AppConstants.iconSizeMedium,
+              colorFilter: ColorFilter.mode(
+                AppColors.primary,
+                BlendMode.srcIn,
               ),
             ),
           ],

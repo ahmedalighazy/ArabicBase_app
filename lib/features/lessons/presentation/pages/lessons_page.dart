@@ -30,7 +30,7 @@ class _LessonsPageState extends State<LessonsPage> {
               image: DecorationImage(
                 image: AssetImage(AssetsConstants.backgroundApp),
                 fit: BoxFit.cover,
-                opacity: AppConstants.opacityMedium,
+                opacity: 0.8,
               ),
             ),
           ),
@@ -38,7 +38,7 @@ class _LessonsPageState extends State<LessonsPage> {
           // أيقونة الكتاب الكبيرة في المنتصف
           Center(
             child: Opacity(
-              opacity: AppConstants.opacityLight,
+              opacity: 0.3,
               child: Icon(
                 Icons.menu_book_rounded,
                 size: AppConstants.iconSizeXLarge,
@@ -49,18 +49,20 @@ class _LessonsPageState extends State<LessonsPage> {
           
           // المحتوى
           SafeArea(
-            child: ListView(
-              padding: EdgeInsets.only(
-                bottom: AppConstants.paddingLarge,
-              ),
+            child: Column(
               children: [
                 _buildHeader(context, lessons),
-                ...lessons.map((lesson) => LessonCard(
-                  lesson: lesson,
-                  onTap: () {
-                    // TODO: Navigate to lesson details
-                  },
-                )),
+                Expanded(
+                  child: ListView.builder(
+                    padding: EdgeInsets.only(
+                      bottom: AppConstants.paddingLarge,
+                    ),
+                    itemCount: lessons.length,
+                    itemBuilder: (context, index) {
+                      return LessonCard(lesson: lessons[index]);
+                    },
+                  ),
+                ),
               ],
             ),
           ),
@@ -113,7 +115,7 @@ class _LessonsPageState extends State<LessonsPage> {
           // التقدم العام
           Row(
             children: [
-              // الخط الأيمن (الفاضي)
+              // الخط الأيمن (فاضي)
               Expanded(
                 child: Container(
                   height: AppConstants.progressBarHeight,
@@ -127,33 +129,53 @@ class _LessonsPageState extends State<LessonsPage> {
               ),
               
               SizedBox(width: AppConstants.spacingMedium),
-              
-              // النسبة المئوية
+              // النسبة المئوية (برتقالي)
               Text(
                 '${(totalProgress * 100).toInt()}%',
                 style: AppTextStyles.percentageLarge,
               ),
-              
               SizedBox(width: AppConstants.spacingMedium),
-              
               // النص
               Text(
                 'التقدم العام',
                 style: AppTextStyles.titleLarge,
               ),
-              
+
               SizedBox(width: AppConstants.spacingMedium),
               
-              // الخط الأيسر (الممتلئ)
+              // الخط الأيسر (ممتلئ بنسبة التقدم من اليمين)
               Expanded(
-                child: Container(
-                  height: AppConstants.progressBarHeight,
-                  decoration: BoxDecoration(
-                    color: AppColors.primary,
-                    borderRadius: BorderRadius.circular(
-                      AppConstants.borderRadiusSmall,
-                    ),
-                  ),
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    return Stack(
+                      children: [
+                        // الخلفية (فاضي)
+                        Container(
+                          height: AppConstants.progressBarHeight,
+                          decoration: BoxDecoration(
+                            color: AppColors.divider.withValues(alpha: 0.4),
+                            borderRadius: BorderRadius.circular(
+                              AppConstants.borderRadiusSmall,
+                            ),
+                          ),
+                        ),
+                        // الممتلئ (من اليمين لليسار)
+                        Positioned(
+                          right: 0, // يبدأ من اليمين
+                          child: Container(
+                            width: constraints.maxWidth * totalProgress,
+                            height: AppConstants.progressBarHeight,
+                            decoration: BoxDecoration(
+                              color: AppColors.primary,
+                              borderRadius: BorderRadius.circular(
+                                AppConstants.borderRadiusSmall,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
                 ),
               ),
             ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:arabic_base/core/constants/app_constants.dart';
+import 'package:arabic_base/core/theme/app_colors.dart';
 import 'package:arabic_base/core/theme/app_text_styles.dart';
 
 class OnboardingContent extends StatefulWidget {
@@ -67,38 +68,40 @@ class _OnboardingContentState extends State<OnboardingContent>
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Spacer(flex: 2),
         
-        // الصورة التوضيحية مع أنيميشن
+        // الصورة التوضيحية مع أنيميشن (213 × 237)
         ScaleTransition(
           scale: _imageScaleAnimation,
           child: FadeTransition(
             opacity: _imageFadeAnimation,
             child: Image.asset(
               widget.image,
-              width: screenWidth * 0.6,
-              height: screenWidth * 0.6,
+              width: 213,
+              height: 237,
               fit: BoxFit.contain,
             ),
           ),
         ),
         
-        const Spacer(flex: 1),
+        SizedBox(height: 10), // المسافة بين الصورة والنص
         
-        // العنوان
+        // العنوان (font 16/21)
         Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: AppConstants.paddingXXLarge,
-          ),
+          padding: EdgeInsets.symmetric(horizontal: 40),
           child: Text(
             widget.title,
             textAlign: TextAlign.center,
-            style: AppTextStyles.headingMedium,
+            style: TextStyle(
+              fontFamily: 'Cairo',
+              fontSize: 16,
+              height: 21 / 16,
+              fontWeight: FontWeight.w500,
+              color: Color(0xFF046855),
+            ),
           ),
         ),
         
@@ -107,9 +110,7 @@ class _OnboardingContentState extends State<OnboardingContent>
         // الوصف
         if (widget.description.isNotEmpty)
           Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: AppConstants.paddingXXLarge,
-            ),
+            padding: EdgeInsets.symmetric(horizontal: 40),
             child: Text(
               widget.description,
               textAlign: TextAlign.center,

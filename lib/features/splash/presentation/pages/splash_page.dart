@@ -58,7 +58,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
 
     // Arabic Text Slide (من بعيد خارج الشاشة الشمال → النص)
     _arabicSlideAnimation = Tween<Offset>(
-      begin: const Offset(-5.0, 0), // أبعد من الأول
+      begin: const Offset(-8.0, 0), // أبعد بكتير من الأول
       end: Offset.zero,
     ).animate(
       CurvedAnimation(
@@ -69,7 +69,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
 
     // Base Text Slide (من بعيد خارج الشاشة اليمين → النص)
     _baseSlideAnimation = Tween<Offset>(
-      begin: const Offset(5.0, 0), // أبعد من الأول
+      begin: const Offset(8.0, 0), // أبعد بكتير من الأول
       end: Offset.zero,
     ).animate(
       CurvedAnimation(

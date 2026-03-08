@@ -19,7 +19,7 @@ class AppTextStyles {
   
   static TextStyle displayMedium = TextStyle(
     fontFamily: _fontFamily,
-    fontSize: 36,
+    fontSize: 24,
     fontWeight: FontWeight.bold,
     color: AppColors.primary,
   );
@@ -58,7 +58,7 @@ class AppTextStyles {
   // ==================== Title Styles ====================
   static TextStyle titleLarge = TextStyle(
     fontFamily: _fontFamily,
-    fontSize: 20,
+    fontSize: 14,
     fontWeight: FontWeight.w600,
     color: AppColors.textPrimary,
   );
@@ -80,7 +80,7 @@ class AppTextStyles {
   // ==================== Body Styles ====================
   static TextStyle bodyLarge = TextStyle(
     fontFamily: _fontFamily,
-    fontSize: 18,
+    fontSize: 17,
     fontWeight: FontWeight.w400,
     color: AppColors.textSecondary,
   );
@@ -125,7 +125,7 @@ class AppTextStyles {
   
   static TextStyle percentageLarge = TextStyle(
     fontFamily: _fontFamily,
-    fontSize: 28,
+    fontSize: 14,
     fontWeight: FontWeight.bold,
     color: AppColors.secondary,
   );
