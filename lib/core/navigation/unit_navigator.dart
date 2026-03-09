@@ -4,11 +4,9 @@ import 'package:arabic_base/features/lessons/presentation/pages/unit_fatha_page.
 import 'package:arabic_base/features/lessons/presentation/pages/unit_kasra_page.dart';
 import 'package:arabic_base/features/lessons/presentation/pages/unit_damma_page.dart';
 
-/// مساعد التنقل بين الوحدات
 class UnitNavigator {
   UnitNavigator._();
 
-  /// التنقل إلى صفحة الوحدة بناءً على معرف الوحدة
   static void navigateToUnit(BuildContext context, String unitId) {
     print('Navigating to unit with ID: $unitId');
     

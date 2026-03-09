@@ -1,4 +1,3 @@
-/// عنصر داخل الوحدة (درس أو تدريب)
 class LessonItem {
   final String id;
   final String title;

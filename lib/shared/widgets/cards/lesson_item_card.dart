@@ -8,7 +8,6 @@ import 'package:arabic_base/features/lessons/domain/entities/lesson_item.dart';
 import 'package:arabic_base/shared/widgets/buttons/primary_button.dart';
 import 'package:arabic_base/shared/widgets/progress/progress_bar.dart';
 
-/// كارد عنصر الوحدة (درس أو تدريب)
 class LessonItemCard extends StatelessWidget {
   final LessonItem item;
   final VoidCallback onTap;
@@ -71,7 +70,6 @@ class LessonItemCard extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          // العنوان
           Text(
             item.title,
             style: AppTextStyles.headingSmall.copyWith(
@@ -79,7 +77,6 @@ class LessonItemCard extends StatelessWidget {
             ),
           ),
           SizedBox(width: AppConstants.spacingMedium),
-          // الأيقونة
           SvgPicture.asset(
             item.iconPath,
             width: 40,
@@ -110,7 +107,6 @@ class LessonItemCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // النص الفرعي
           Text(
             item.subtitle,
             textAlign: TextAlign.right,
@@ -124,7 +120,6 @@ class LessonItemCard extends StatelessWidget {
           
           SizedBox(height: AppConstants.spacingLarge),
           
-          // التقدم
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -143,7 +138,6 @@ class LessonItemCard extends StatelessWidget {
           
           SizedBox(height: AppConstants.spacingSmall),
           
-          // شريط التقدم
           ProgressBar(progress: item.progress),
         ],
       ),

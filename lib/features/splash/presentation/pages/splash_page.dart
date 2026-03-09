@@ -45,9 +45,8 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
       duration: AppConstants.splashCircleAnimationDuration,
     );
 
-    // Logo Scale Animation (أصغر → كبير ويثبت)
     _logoScaleAnimation = Tween<double>(
-      begin: 0.1, // أصغر من الأول
+      begin: 0.1,
       end: 1.0,
     ).animate(
       CurvedAnimation(
@@ -56,9 +55,8 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
       ),
     );
 
-    // Arabic Text Slide (من بعيد خارج الشاشة الشمال → النص)
     _arabicSlideAnimation = Tween<Offset>(
-      begin: const Offset(-8.0, 0), // أبعد بكتير من الأول
+      begin: const Offset(-8.0, 0),
       end: Offset.zero,
     ).animate(
       CurvedAnimation(
@@ -67,9 +65,8 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
       ),
     );
 
-    // Base Text Slide (من بعيد خارج الشاشة اليمين → النص)
     _baseSlideAnimation = Tween<Offset>(
-      begin: const Offset(8.0, 0), // أبعد بكتير من الأول
+      begin: const Offset(8.0, 0),
       end: Offset.zero,
     ).animate(
       CurvedAnimation(
@@ -78,7 +75,6 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
       ),
     );
 
-    // Circle Scale Animation (صغير → يغطي الشاشة)
     _circleScaleAnimation = Tween<double>(
       begin: 0.0,
       end: 1.0,
@@ -94,13 +90,11 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   }
 
   void _startAnimations() async {
-    // التلاتة يبدأوا في نفس الوقت ويوصلوا للنص مع بعض
     await Future.wait([
       _logoController.forward(),
       _textController.forward(),
     ]);
     
-    // بعد ما يتمركزوا، الدائرة الخضراء تبدأ
     await _circleController.forward();
     
     // Navigate to onboarding
@@ -130,7 +124,6 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     return Scaffold(
       body: Stack(
         children: [
-          // 1. Background Image (ثابتة)
           Positioned.fill(
             child: Image.asset(
               AssetsConstants.backgroundApp,
@@ -141,7 +134,6 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
             ),
           ),
           
-          // 2. Circular Reveal Animation (الدائرة الخضراء)
           AnimatedBuilder(
             animation: _circleController,
             builder: (context, child) {
@@ -160,12 +152,10 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
             },
           ),
           
-          // 3. Logo and Text (فوق كل حاجة) - يتحركوا مع بعض
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Logo Animation (يكبر)
                 ScaleTransition(
                   scale: _logoScaleAnimation,
                   child: SvgPicture.asset(
@@ -178,13 +168,11 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
                 
                 SizedBox(height: AppConstants.spacingMedium),
                 
-                // Text Animations (يجوا من الجنبين)
                 ClipRect(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      // Arabic (من الشمال)
                       SlideTransition(
                         position: _arabicSlideAnimation,
                         child: Text(
@@ -192,7 +180,6 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
                           style: AppTextStyles.displaySmall,
                         ),
                       ),
-                      // Base (من اليمين)
                       SlideTransition(
                         position: _baseSlideAnimation,
                         child: Text(

@@ -114,14 +114,12 @@ class LessonCard extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // التقدم على اليسار
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
-                // التقدم والنسبة في صف واحد
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -136,7 +134,6 @@ class LessonCard extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: AppConstants.spacingSmall),
-                // الشريط
                 ProgressBar(progress: lesson.progress),
               ],
             ),
@@ -144,7 +141,6 @@ class LessonCard extends StatelessWidget {
           
           SizedBox(width: AppConstants.spacingXLarge),
           
-          // الدروس والتدريبات والأيقونة على اليمين
           Row(
             children: [
               Column(

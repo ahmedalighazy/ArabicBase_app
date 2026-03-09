@@ -24,7 +24,6 @@ class _LessonsPageState extends State<LessonsPage> {
     return Scaffold(
       body: Stack(
         children: [
-          // الخلفية
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
@@ -35,7 +34,6 @@ class _LessonsPageState extends State<LessonsPage> {
             ),
           ),
           
-          // أيقونة الكتاب الكبيرة في المنتصف
           Center(
             child: Opacity(
               opacity: 0.3,
@@ -47,7 +45,6 @@ class _LessonsPageState extends State<LessonsPage> {
             ),
           ),
           
-          // المحتوى
           SafeArea(
             child: Column(
               children: [
@@ -95,7 +92,6 @@ class _LessonsPageState extends State<LessonsPage> {
       ),
       child: Column(
         children: [
-          // العنوان
           Text(
             'الفهرس التعليمي',
             style: AppTextStyles.displayMedium,
@@ -103,7 +99,6 @@ class _LessonsPageState extends State<LessonsPage> {
           
           SizedBox(height: AppConstants.spacingMedium),
           
-          // النص الفرعي
           Text(
             'استعرض الوحدات وواصل التعلّم خطوة بخطوة',
             textAlign: TextAlign.center,
@@ -112,10 +107,8 @@ class _LessonsPageState extends State<LessonsPage> {
           
           SizedBox(height: AppConstants.spacingXLarge),
           
-          // التقدم العام
           Row(
             children: [
-              // الخط الأيمن (فاضي)
               Expanded(
                 child: Container(
                   height: AppConstants.progressBarHeight,
@@ -129,13 +122,11 @@ class _LessonsPageState extends State<LessonsPage> {
               ),
               
               SizedBox(width: AppConstants.spacingMedium),
-              // النسبة المئوية (برتقالي)
               Text(
                 '${(totalProgress * 100).toInt()}%',
                 style: AppTextStyles.percentageLarge,
               ),
               SizedBox(width: AppConstants.spacingMedium),
-              // النص
               Text(
                 'التقدم العام',
                 style: AppTextStyles.titleLarge,
@@ -143,13 +134,11 @@ class _LessonsPageState extends State<LessonsPage> {
 
               SizedBox(width: AppConstants.spacingMedium),
               
-              // الخط الأيسر (ممتلئ بنسبة التقدم من اليمين)
               Expanded(
                 child: LayoutBuilder(
                   builder: (context, constraints) {
                     return Stack(
                       children: [
-                        // الخلفية (فاضي)
                         Container(
                           height: AppConstants.progressBarHeight,
                           decoration: BoxDecoration(
@@ -159,9 +148,8 @@ class _LessonsPageState extends State<LessonsPage> {
                             ),
                           ),
                         ),
-                        // الممتلئ (من اليمين لليسار)
                         Positioned(
-                          right: 0, // يبدأ من اليمين
+                          right: 0,
                           child: Container(
                             width: constraints.maxWidth * totalProgress,
                             height: AppConstants.progressBarHeight,

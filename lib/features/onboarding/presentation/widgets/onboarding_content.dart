@@ -34,7 +34,6 @@ class _OnboardingContentState extends State<OnboardingContent>
       duration: const Duration(milliseconds: 800),
     );
 
-    // Scale Animation (صغير → كبير)
     _imageScaleAnimation = Tween<double>(
       begin: 0.5,
       end: 1.0,
@@ -56,7 +55,6 @@ class _OnboardingContentState extends State<OnboardingContent>
       ),
     );
 
-    // بدء الأنيميشن
     _imageController.forward();
   }
 
@@ -73,7 +71,6 @@ class _OnboardingContentState extends State<OnboardingContent>
       children: [
         const Spacer(flex: 2),
         
-        // الصورة التوضيحية مع أنيميشن (213 × 237)
         ScaleTransition(
           scale: _imageScaleAnimation,
           child: FadeTransition(
@@ -87,9 +84,8 @@ class _OnboardingContentState extends State<OnboardingContent>
           ),
         ),
         
-        SizedBox(height: 10), // المسافة بين الصورة والنص
+        SizedBox(height: 10),
         
-        // العنوان (font 16/21)
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 40),
           child: Text(
@@ -107,7 +103,6 @@ class _OnboardingContentState extends State<OnboardingContent>
         
         SizedBox(height: AppConstants.spacingLarge),
         
-        // الوصف
         if (widget.description.isNotEmpty)
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 40),

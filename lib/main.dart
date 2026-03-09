@@ -9,7 +9,6 @@ import 'package:arabic_base/features/lessons/presentation/pages/lessons_page.dar
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   
-  // إعداد شريط الحالة
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
@@ -29,7 +28,6 @@ class ArabicBaseApp extends StatelessWidget {
       title: 'ArabicBase',
       debugShowCheckedModeBanner: false,
       
-      // الثيم
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
@@ -40,14 +38,11 @@ class ArabicBaseApp extends StatelessWidget {
         fontFamily: AssetsConstants.fontCairo,
         scaffoldBackgroundColor: AppColors.background,
         
-        // دعم RTL للعربية
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       
-      // الشاشة الأولى
       home: const SplashPage(),
       
-      // الروتات
       routes: {
         '/splash': (context) => const SplashPage(),
         '/onboarding': (context) => const OnboardingPage(),

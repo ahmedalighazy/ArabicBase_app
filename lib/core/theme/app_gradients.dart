@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// التدرجات اللونية المستخدمة في التطبيق
 class AppGradients {
   AppGradients._();
   

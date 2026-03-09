@@ -1,4 +1,3 @@
-/// ثوابت التطبيق العامة
 class AppConstants {
   AppConstants._();
   

@@ -27,7 +27,7 @@ class BottomNavBar extends StatelessWidget {
       ),
       height: AppConstants.bottomNavHeight,
       decoration: BoxDecoration(
-        gradient: AppGradients.primaryGradient, // تدرج كامل بدون شفافية
+        gradient: AppGradients.primaryGradient,
         borderRadius: BorderRadius.circular(AppConstants.borderRadiusMedium),
         boxShadow: [
           BoxShadow(

@@ -49,7 +49,6 @@ class _OnboardingPageState extends State<OnboardingPage> with TickerProviderStat
   void initState() {
     super.initState();
     
-    // Logo Animation Controller (أول ما الصفحة تفتح)
     _logoController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 600),
@@ -74,7 +73,6 @@ class _OnboardingPageState extends State<OnboardingPage> with TickerProviderStat
       curve: Curves.easeOut,
     ));
 
-    // Logo Slide Animation (من فوق مع bounce)
     _logoSlideAnimation = Tween<Offset>(
       begin: const Offset(0, -0.3),
       end: Offset.zero,
@@ -99,10 +97,8 @@ class _OnboardingPageState extends State<OnboardingPage> with TickerProviderStat
       curve: Curves.easeOut,
     ));
 
-    // بدء أنيميشن اللوجو أول ما الصفحة تفتح
     _logoController.forward();
     
-    // بدء الأنيميشن للصفحة الأولى
     _fadeController.forward();
     _slideController.forward();
   }
@@ -121,7 +117,6 @@ class _OnboardingPageState extends State<OnboardingPage> with TickerProviderStat
       _currentPage = page;
     });
     
-    // إعادة تشغيل الأنيميشن للمحتوى فقط
     _fadeController.reset();
     _slideController.reset();
     _fadeController.forward();
@@ -146,11 +141,10 @@ class _OnboardingPageState extends State<OnboardingPage> with TickerProviderStat
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFE8F5F3), // لون الخلفية الفاتح
+      backgroundColor: const Color(0xFFE8F5F3),
       body: SafeArea(
         child: Column(
           children: [
-            // الشعار في الأعلى مع أنيميشن
             Padding(
               padding: EdgeInsets.only(
                 top: AppConstants.paddingXXLarge,
@@ -165,7 +159,6 @@ class _OnboardingPageState extends State<OnboardingPage> with TickerProviderStat
               ),
             ),
             
-            // محتوى الصفحات
             Expanded(
               child: PageView.builder(
                 controller: _pageController,
@@ -187,7 +180,6 @@ class _OnboardingPageState extends State<OnboardingPage> with TickerProviderStat
               ),
             ),
             
-            // المؤشرات (تحت النص مباشرة)
             Padding(
               padding: EdgeInsets.only(
                 bottom: AppConstants.paddingLarge,
@@ -198,7 +190,6 @@ class _OnboardingPageState extends State<OnboardingPage> with TickerProviderStat
               ),
             ),
             
-            // الأزرار
             Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: AppConstants.paddingLarge,
@@ -207,7 +198,6 @@ class _OnboardingPageState extends State<OnboardingPage> with TickerProviderStat
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // زر تخطي
                   TextButton(
                     onPressed: _skip,
                     style: TextButton.styleFrom(
@@ -227,7 +217,6 @@ class _OnboardingPageState extends State<OnboardingPage> with TickerProviderStat
                     ),
                   ),
                   
-                  // زر التالي/البدء (دائري)
                   _currentPage == _pages.length - 1
                       ? ElevatedButton(
                           onPressed: _nextPage,

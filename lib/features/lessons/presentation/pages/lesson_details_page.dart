@@ -7,7 +7,6 @@ import 'package:arabic_base/features/lessons/domain/entities/lesson.dart';
 import 'package:arabic_base/features/lessons/domain/entities/lesson_item.dart';
 import 'package:arabic_base/shared/widgets/cards/lesson_item_card.dart';
 
-/// صفحة تفاصيل الوحدة
 class LessonDetailsPage extends StatelessWidget {
   final Lesson lesson;
 
@@ -23,7 +22,6 @@ class LessonDetailsPage extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          // الخلفية
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
@@ -34,7 +32,6 @@ class LessonDetailsPage extends StatelessWidget {
             ),
           ),
           
-          // أيقونة الكتاب الكبيرة في المنتصف
           Center(
             child: Opacity(
               opacity: 0.3,
@@ -46,7 +43,6 @@ class LessonDetailsPage extends StatelessWidget {
             ),
           ),
           
-          // المحتوى
           SafeArea(
             child: Column(
               children: [
@@ -80,7 +76,6 @@ class LessonDetailsPage extends StatelessWidget {
       padding: EdgeInsets.all(AppConstants.paddingLarge),
       child: Column(
         children: [
-          // زر الرجوع والعنوان
           Row(
             children: [
               IconButton(
@@ -115,13 +110,12 @@ class LessonDetailsPage extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(width: 48), // للتوازن مع زر الرجوع
+              SizedBox(width: 48),
             ],
           ),
           
           SizedBox(height: AppConstants.spacingLarge),
           
-          // التقدم العام
           _buildProgressBar(),
         ],
       ),

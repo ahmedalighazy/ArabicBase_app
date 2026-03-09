@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:arabic_base/core/constants/assets_constants.dart';
 
-/// خلفية التطبيق المشتركة
 class AppBackground extends StatelessWidget {
   final double opacity;
   final Widget child;

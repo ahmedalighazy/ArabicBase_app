@@ -1,4 +1,3 @@
-/// ثوابت مسارات الأصول
 class AssetsConstants {
   AssetsConstants._();
   

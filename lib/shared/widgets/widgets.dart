@@ -5,6 +5,7 @@ export 'buttons/primary_button.dart';
 
 // Cards
 export 'cards/lesson_card.dart';
+export 'cards/lesson_item_card.dart';
 
 // Common
 export 'common/app_background.dart';
@@ -15,3 +16,12 @@ export 'navigation/bottom_nav_bar.dart';
 
 // Progress
 export 'progress/progress_bar.dart';
+
+// Headers
+export 'headers/unit_header.dart';
+
+// Backgrounds
+export 'backgrounds/unit_background.dart';
+
+// Layouts
+export 'layouts/unit_page_layout.dart';

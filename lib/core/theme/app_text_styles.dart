@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:arabic_base/core/theme/app_colors.dart';
 import 'package:arabic_base/core/constants/assets_constants.dart';
 
-/// أنماط النصوص المستخدمة في التطبيق
 class AppTextStyles {
   AppTextStyles._();
   
